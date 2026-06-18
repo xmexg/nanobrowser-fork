@@ -13,6 +13,11 @@
 
 </div>
 
+<div align="center">
+   <a href="README-es.md">English</a> | <a href="README-tr.md">Türkçe</a> | <a href="README-zh-Hant.md">繁體中文</a> | <a href="README-zh-Hans.md">简体中文</a>
+</div>
+<hr>
+
 ## 🌐 Nanobrowser
 
 Nanobrowser is an open-source AI web automation tool that runs in your browser. A free alternative to OpenAI Operator with flexible LLM options and multi-agent system.
