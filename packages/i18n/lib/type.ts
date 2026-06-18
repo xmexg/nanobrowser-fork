@@ -5,11 +5,17 @@
 import type arMessage from '../locales/ar/messages.json';
 import type enMessage from '../locales/en/messages.json';
 import type pt_BRMessage from '../locales/pt_BR/messages.json';
+import type zh_CNMessage from '../locales/zh_CN/messages.json';
+import type zh_HKMessage from '../locales/zh_HK/messages.json';
+import type zh_SGMessage from '../locales/zh_SG/messages.json';
 import type zh_TWMessage from '../locales/zh_TW/messages.json';
 
 export type MessageKey = keyof typeof arMessage &
   keyof typeof enMessage &
   keyof typeof pt_BRMessage &
+  keyof typeof zh_CNMessage &
+  keyof typeof zh_HKMessage &
+  keyof typeof zh_SGMessage &
   keyof typeof zh_TWMessage;
 
-export type DevLocale = 'ar' | 'en' | 'pt_BR' | 'zh_TW';
+export type DevLocale = 'ar' | 'en' | 'pt_BR' | 'zh_CN' | 'zh_HK' | 'zh_SG' | 'zh_TW';

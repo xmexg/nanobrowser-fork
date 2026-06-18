@@ -58,6 +58,8 @@ const SUPPORTED_LANGUAGES = {
   uk: 'Ukrainian',
   vi: 'Vietnamese',
   zh_CN: 'Chinese (China)',
+  zh_HK: 'Chinese (Hong Kong)',
+  zh_SG: 'Chinese (Singapore)',
   zh_TW: 'Chinese (Taiwan)',
 };
 
@@ -95,16 +97,24 @@ export type DevLocale = ${locales.map(locale => `'${locale}'`).join(' | ')};
 function makeGetMessageFromLocaleFile(locales) {
   const defaultLocaleCode = `(() => {
   const locales = ${JSON.stringify(locales).replace(/"/g, "'" ).replace(/,/g, ', ' )};
-  const firstLocale = locales[0];
-  const defaultLocale = Intl.DateTimeFormat().resolvedOptions().locale.replace('-', '_');
-  if (locales.includes(defaultLocale)) {
-    return defaultLocale;
+  // Prefer navigator.language (browser UI language) over Intl.DateTimeFormat (date format locale)
+  const browserLocale = (typeof navigator !== 'undefined' && navigator.language
+    ? navigator.language
+    : Intl.DateTimeFormat().resolvedOptions().locale
+  ).replace('-', '_');
+  // Exact match (e.g. 'zh_CN')
+  if (locales.includes(browserLocale)) {
+    return browserLocale;
   }
-  const defaultLocaleWithoutRegion = defaultLocale.split('_')[0];
-  if (locales.includes(defaultLocaleWithoutRegion)) {
-    return defaultLocaleWithoutRegion;
+  // Match by language code without region (e.g. 'zh' -> triggers zh_CN mapping below)
+  const localeWithoutRegion = browserLocale.split('_')[0];
+  if (locales.includes(localeWithoutRegion)) {
+    return localeWithoutRegion;
   }
-  return firstLocale;
+  // Special: map generic 'zh' to 'zh_CN' (Simplified Chinese)
+  if (localeWithoutRegion === 'zh') return 'zh_CN';
+  // Default fallback to English
+  return 'en';
 })()`;
 
   const getMessageFromLocaleFile = `/**

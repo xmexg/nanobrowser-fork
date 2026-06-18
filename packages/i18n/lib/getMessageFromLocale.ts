@@ -5,6 +5,9 @@
 import arMessage from '../locales/ar/messages.json';
 import enMessage from '../locales/en/messages.json';
 import pt_BRMessage from '../locales/pt_BR/messages.json';
+import zh_CNMessage from '../locales/zh_CN/messages.json';
+import zh_HKMessage from '../locales/zh_HK/messages.json';
+import zh_SGMessage from '../locales/zh_SG/messages.json';
 import zh_TWMessage from '../locales/zh_TW/messages.json';
 
 export function getMessageFromLocale(locale: string) {
@@ -15,6 +18,12 @@ export function getMessageFromLocale(locale: string) {
       return enMessage;
     case 'pt_BR':
       return pt_BRMessage;
+    case 'zh_CN':
+      return zh_CNMessage;
+    case 'zh_HK':
+      return zh_HKMessage;
+    case 'zh_SG':
+      return zh_SGMessage;
     case 'zh_TW':
       return zh_TWMessage;
     default:
@@ -23,15 +32,24 @@ export function getMessageFromLocale(locale: string) {
 }
 
 export const defaultLocale = (() => {
-  const locales = ['ar', 'en', 'pt_BR', 'zh_TW'];
-  const firstLocale = locales[0];
-  const defaultLocale = Intl.DateTimeFormat().resolvedOptions().locale.replace('-', '_');
-  if (locales.includes(defaultLocale)) {
-    return defaultLocale;
+  const locales = ['ar', 'en', 'pt_BR', 'zh_CN', 'zh_HK', 'zh_SG', 'zh_TW'];
+  // Prefer navigator.language (browser UI language) over Intl.DateTimeFormat (date format locale)
+  const browserLocale = (
+    typeof navigator !== 'undefined' && navigator.language
+      ? navigator.language
+      : Intl.DateTimeFormat().resolvedOptions().locale
+  ).replace('-', '_');
+  // Exact match (e.g. 'zh_CN')
+  if (locales.includes(browserLocale)) {
+    return browserLocale;
   }
-  const defaultLocaleWithoutRegion = defaultLocale.split('_')[0];
-  if (locales.includes(defaultLocaleWithoutRegion)) {
-    return defaultLocaleWithoutRegion;
+  // Match by language code without region (e.g. 'zh' -> triggers zh_CN mapping below)
+  const localeWithoutRegion = browserLocale.split('_')[0];
+  if (locales.includes(localeWithoutRegion)) {
+    return localeWithoutRegion;
   }
-  return firstLocale;
+  // Special: map generic 'zh' to 'zh_CN' (Simplified Chinese)
+  if (localeWithoutRegion === 'zh') return 'zh_CN';
+  // Default fallback to English
+  return 'en';
 })();
