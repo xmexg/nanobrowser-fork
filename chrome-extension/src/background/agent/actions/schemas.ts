@@ -213,3 +213,15 @@ export const waitActionSchema: ActionSchema = {
     seconds: z.number().int().default(3).describe('amount of seconds'),
   }),
 };
+
+export const changeViewportModeActionSchema: ActionSchema = {
+  name: 'change_viewport_mode',
+  description:
+    'Change how much of the page the AI can see. Use this when you need to see content that is not currently visible. "visible" mode shows only the current viewport (requires scrolling for more content). "all" mode shows all loaded page content at once (uses more tokens but allows seeing everything). Switch to "all" mode when you need to see the full page without scrolling.',
+  schema: z.object({
+    intent: z.string().default('').describe('purpose of this action'),
+    mode: z
+      .enum(['visible', 'all'])
+      .describe("viewport mode: 'visible' for current viewport only, 'all' for full page content"),
+  }),
+};

@@ -182,12 +182,13 @@ export default class Page {
     if (!this._validWebPage) {
       return null;
     }
+    const effectiveViewportExpansion = this._config.includeAllContent ? -1 : this._config.viewportExpansion;
     return _getClickableElements(
       this._tabId,
       this.url(),
       showHighlightElements,
       focusElement,
-      this._config.viewportExpansion,
+      effectiveViewportExpansion,
     );
   }
 

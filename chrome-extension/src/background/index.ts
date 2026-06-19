@@ -317,6 +317,11 @@ async function setupExecutor(taskId: string, task: string, browserContext: Brows
   browserContext.updateConfig({
     minimumWaitPageLoadTime: generalSettings.minWaitPageLoad / 1000.0,
     displayHighlights: generalSettings.displayHighlights,
+    // Map viewportMode to includeAllContent:
+    // 'auto' → false (starts with visible viewport, AI can expand later)
+    // 'visible' → false (always only visible viewport)
+    // 'all' → true (always all loaded content)
+    includeAllContent: generalSettings.viewportMode === 'all',
   });
 
   const executor = new Executor(task, taskId, browserContext, navigatorLLM, {

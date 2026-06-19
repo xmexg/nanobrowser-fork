@@ -263,6 +263,21 @@
     "message": "Enable storing and replaying of agent step history (experimental, may have issues)"
   },
 
+  "options_general_viewportMode": {
+    "message": "AI Viewport Range"
+  },
+  "options_general_viewportMode_desc": {
+    "message": "Controls how much of the page the AI can see. Auto (default): starts with visible viewport, AI can expand to all content as needed; Visible: only show content in the current viewport; All: show all loaded page content (may use more tokens)"
+  },
+  "options_general_viewportMode_auto": {
+    "message": "Auto (default)"
+  },
+  "options_general_viewportMode_visible": {
+    "message": "Visible area only"
+  },
+  "options_general_viewportMode_all": {
+    "message": "All loaded content"
+  },
   "options_models_providers_header": {
     "message": "LLM Providers"
   },
@@ -796,6 +811,15 @@
   },
   "act_nextPage_ok": {
     "message": "Scrolled to next page"
+  },
+  "act_changeViewportMode_start": {
+    "message": "Change viewport mode"
+  },
+  "act_changeViewportMode_all": {
+    "message": "Switched to full page content mode — now showing all loaded content"
+  },
+  "act_changeViewportMode_visible": {
+    "message": "Switched to visible viewport mode — now showing only the current viewport"
   },
   "act_errors_alreadyAtTop": {
     "message": "Element with index $INDEX$ is already at top, cannot scroll to previous page",

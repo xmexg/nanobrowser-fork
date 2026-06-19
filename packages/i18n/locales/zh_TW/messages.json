@@ -262,6 +262,21 @@
   "options_general_replayHistoricalTasks_desc": {
     "message": "啟用儲存與重播代理程式的步驟歷史紀錄 (此為實驗性功能，可能存在問題)"
   },
+  "options_general_viewportMode": {
+    "message": "AI可視範圍"
+  },
+  "options_general_viewportMode_desc": {
+    "message": "控制AI可以看到的頁面範圍。AI決定（預設）：先顯示可視區域，AI可根據需要自動擴展到已加載區域；可視區域：僅顯示當前視口內內容；已加載區域：顯示頁面所有已加載內容（可能消耗更多Token）"
+  },
+  "options_general_viewportMode_auto": {
+    "message": "AI決定（預設）"
+  },
+  "options_general_viewportMode_visible": {
+    "message": "可視區域"
+  },
+  "options_general_viewportMode_all": {
+    "message": "已加載區域"
+  },
   "options_models_providers_header": {
     "message": "LLM 提供者"
   },
@@ -788,6 +803,15 @@
   },
   "act_nextPage_ok": {
     "message": "已捲動至下一頁"
+  },
+  "act_changeViewportMode_start": {
+    "message": "切換可視範圍模式"
+  },
+  "act_changeViewportMode_all": {
+    "message": "已切換到完整頁面模式 — 現在顯示全部已加載內容"
+  },
+  "act_changeViewportMode_visible": {
+    "message": "已切換到可視區域模式 — 現在只顯示當前視口"
   },
   "act_errors_alreadyAtTop": {
     "message": "索引為 $INDEX$ 的元素已在頂端，無法捲動至上一頁",

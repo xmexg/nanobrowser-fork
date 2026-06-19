@@ -262,6 +262,21 @@
   "options_general_replayHistoricalTasks_desc": {
     "message": "Ativar o armazenamento e a reprodução do histórico de passos do agente (experimental, pode ter problemas)"
   },
+  "options_general_viewportMode": {
+    "message": "Alcance do Viewport da IA"
+  },
+  "options_general_viewportMode_desc": {
+    "message": "Controla quanto da página a IA pode ver. Automático (padrão): começa com viewport visível, IA pode expandir conforme necessário; Visível: mostra apenas o conteúdo da janela de visualização atual; Tudo: mostra todo o conteúdo carregado da página (pode consumir mais tokens)"
+  },
+  "options_general_viewportMode_auto": {
+    "message": "Automático (padrão)"
+  },
+  "options_general_viewportMode_visible": {
+    "message": "Apenas área visível"
+  },
+  "options_general_viewportMode_all": {
+    "message": "Todo conteúdo carregado"
+  },
   "options_models_providers_header": {
     "message": "Provedores de LLM"
   },
@@ -795,6 +810,15 @@
   },
   "act_nextPage_ok": {
     "message": "Rolado para a próxima página"
+  },
+  "act_changeViewportMode_start": {
+    "message": "Alterar modo de viewport"
+  },
+  "act_changeViewportMode_all": {
+    "message": "Alternado para modo de página completa — mostrando todo o conteúdo carregado"
+  },
+  "act_changeViewportMode_visible": {
+    "message": "Alternado para modo de viewport visível — mostrando apenas a janela de visualização atual"
   },
   "act_errors_alreadyAtTop": {
     "message": "O elemento com índice $INDEX$ já está no topo, não é possível rolar para a página anterior",

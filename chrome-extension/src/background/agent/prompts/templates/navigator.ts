@@ -87,7 +87,9 @@ Common action sequences:
 - You are provided with procedural memory summaries that condense previous task history (every N steps). Use these summaries to maintain context about completed actions, current progress, and next steps. The summaries appear in chronological order and contain key information about navigation history, findings, errors encountered, and current state. Refer to these summaries to avoid repeating actions and to ensure consistent progress toward the task goal.
 
 9. Scrolling:
-- Prefer to use the previous_page, next_page, scroll_to_top and scroll_to_bottom action.
+- If you cannot see the content you need, first use scroll actions (previous_page, next_page, scroll_to_top, scroll_to_bottom) to navigate.
+- If repeated scrolling is not helping to find the content you need, use the change_viewport_mode action to switch to "all" mode — this will show all loaded page content at once (may use more tokens).
+- You can switch back to "visible" mode if you only need the current viewport again.
 - Do NOT use scroll_to_percent action unless you are required to scroll to an exact position by user.
 
 10. Extraction:

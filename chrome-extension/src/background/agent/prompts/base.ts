@@ -33,9 +33,12 @@ abstract class BasePrompt {
     let formattedElementsText = '';
     if (rawElementsText !== '') {
       const scrollInfo = `[Scroll info of current page] window.scrollY: ${browserState.scrollY}, document.body.scrollHeight: ${browserState.scrollHeight}, window.visualViewport.height: ${browserState.visualViewportHeight}, visual viewport height as percentage of scrollable distance: ${Math.round((browserState.visualViewportHeight / (browserState.scrollHeight - browserState.visualViewportHeight)) * 100)}%\n`;
+      const config = context.browserContext.getConfig();
+      const viewportMode = config.includeAllContent ? 'all' : 'visible';
+      const viewportInfo = `[Viewport mode] ${viewportMode}\n`;
       logger.info(scrollInfo);
       const elementsText = wrapUntrustedContent(rawElementsText);
-      formattedElementsText = `${scrollInfo}[Start of page]\n${elementsText}\n[End of page]\n`;
+      formattedElementsText = `${viewportInfo}${scrollInfo}[Start of page]\n${elementsText}\n[End of page]\n`;
     } else {
       formattedElementsText = 'empty page';
     }

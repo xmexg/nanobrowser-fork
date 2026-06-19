@@ -22,6 +22,7 @@ export type RawDomElementNode = {
   pageCoordinates?: CoordinateSet;
   viewportInfo?: ViewportInfo;
   shadowRoot?: boolean;
+  textContent?: string; // Direct text content for AI reference (no nested duplication)
 };
 
 export type RawDomTreeNode = RawDomTextNode | RawDomElementNode;
@@ -31,6 +32,7 @@ export interface BuildDomTreeArgs {
   focusHighlightIndex: number;
   viewportExpansion: number;
   debugMode?: boolean;
+  includeAllContent?: boolean;
 }
 
 export interface PerfMetrics {

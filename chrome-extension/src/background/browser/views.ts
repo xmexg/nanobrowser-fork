@@ -48,6 +48,14 @@ export interface BrowserContextConfig {
   viewportExpansion: number;
 
   /**
+   * If true, include all content from the page regardless of viewport.
+   * Equivalent to setting viewportExpansion to -1.
+   * When true, overrides viewportExpansion.
+   * @default false
+   */
+  includeAllContent: boolean;
+
+  /**
    * List of allowed domains that can be accessed. If None, all domains are allowed.
    * @default null
    */
@@ -90,6 +98,7 @@ export const DEFAULT_BROWSER_CONTEXT_CONFIG: BrowserContextConfig = {
   includeDynamicAttributes: true,
   homePageUrl: 'about:blank',
   displayHighlights: true,
+  includeAllContent: false,
 };
 
 export interface PageState extends DOMState {

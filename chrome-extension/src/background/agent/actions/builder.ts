@@ -22,6 +22,7 @@ import {
   nextPageActionSchema,
   scrollToTopActionSchema,
   scrollToBottomActionSchema,
+  changeViewportModeActionSchema,
 } from './schemas';
 import { z } from 'zod';
 import { createLogger } from '@src/background/log';
@@ -701,6 +702,20 @@ export class ActionBuilder {
       true,
     );
     actions.push(selectDropdownOption);
+
+    // Change viewport mode (visible/all) — session-only, does not affect global settings
+    const changeViewportMode = new Action(async (input: z.infer<typeof changeViewportModeActionSchema.schema>) => {
+      const intent = input.intent || t('act_changeViewportMode_start');
+      this.context.emitEvent(Actors.NAVIGATOR, ExecutionState.ACT_START, intent);
+
+      // Update the browser context config for this session only
+      this.context.browserContext.updateConfig({ includeAllContent: input.mode === 'all' });
+
+      const msg = input.mode === 'all' ? t('act_changeViewportMode_all') : t('act_changeViewportMode_visible');
+      this.context.emitEvent(Actors.NAVIGATOR, ExecutionState.ACT_OK, msg);
+      return new ActionResult({ extractedContent: msg, includeInMemory: true });
+    }, changeViewportModeActionSchema);
+    actions.push(changeViewportMode);
 
     return actions;
   }

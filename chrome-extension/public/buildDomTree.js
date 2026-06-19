@@ -6,10 +6,22 @@ window.buildDomTree = (
     debugMode: false,
     startId: 0,
     startHighlightIndex: 0,
+    includeAllContent: false,
   },
 ) => {
-  const { showHighlightElements, focusHighlightIndex, viewportExpansion, startHighlightIndex, startId, debugMode } =
-    args;
+  let {
+    showHighlightElements,
+    focusHighlightIndex,
+    viewportExpansion,
+    startHighlightIndex,
+    startId,
+    debugMode,
+    includeAllContent,
+  } = args;
+  // When includeAllContent is true, override viewportExpansion to -1 to include all content
+  if (includeAllContent) {
+    viewportExpansion = -1;
+  }
   // Make sure to do highlight elements always, but we can hide the highlights if needed
   const doHighlightElements = true;
 
@@ -1486,6 +1498,28 @@ window.buildDomTree = (
 
       if (!hasSize) {
         return null;
+      }
+    }
+
+    // Attach direct text content for AI reference — only collect immediate text node children,
+    // avoiding nested duplication where parent.innerText includes all descendant text.
+    // Only collect for visible top-layer elements to skip hidden dialogs/popups/etc.
+    // Also check viewport: when viewportExpansion === -1 (includeAll), skip viewport check.
+    if (
+      node.nodeType === Node.ELEMENT_NODE &&
+      nodeData.isVisible &&
+      nodeData.isTopElement &&
+      (viewportExpansion === -1 || isInExpandedViewport(node, viewportExpansion))
+    ) {
+      let directText = '';
+      for (const child of node.childNodes) {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const text = child.textContent?.trim();
+          if (text) directText += text + ' ';
+        }
+      }
+      if (directText.trim()) {
+        nodeData.textContent = directText.trim();
       }
     }
 

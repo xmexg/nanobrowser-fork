@@ -263,6 +263,21 @@
     "message": "تفعيل تخزين وإعادة تشغيل سجل خطوات الوكيل (تجريبي، قد يحتوي على مشكلات)"
   },
 
+  "options_general_viewportMode": {
+    "message": "نطاق رؤية الذكاء الاصطناعي"
+  },
+  "options_general_viewportMode_desc": {
+    "message": "التحكم في مقدار الصفحة التي يمكن للذكاء الاصطناعي رؤيتها. تلقائي (افتراضي): يبدأ بمنطقة الرؤية المرئية، ويمكن للذكاء الاصطناعي التوسع حسب الحاجة؛ مرئي: عرض محتوى منطقة الرؤية فقط؛ الكل: عرض كل محتوى الصفحة المحمل (قد يستهلك المزيد من الرموز)"
+  },
+  "options_general_viewportMode_auto": {
+    "message": "تلقائي (افتراضي)"
+  },
+  "options_general_viewportMode_visible": {
+    "message": "منطقة الرؤية فقط"
+  },
+  "options_general_viewportMode_all": {
+    "message": "كل المحتوى المحمل"
+  },
   "options_models_providers_header": {
     "message": "موفرو نماذج اللغة الكبيرة"
   },
@@ -796,6 +811,15 @@
   },
   "act_nextPage_ok": {
     "message": "تم التمرير إلى الصفحة التالية"
+  },
+  "act_changeViewportMode_start": {
+    "message": "تغيير وضع نطاق الرؤية"
+  },
+  "act_changeViewportMode_all": {
+    "message": "تم التبديل إلى وضع محتوى الصفحة الكامل — عرض كل المحتوى المحمل"
+  },
+  "act_changeViewportMode_visible": {
+    "message": "تم التبديل إلى وضع نطاق الرؤية المرئي — عرض إطار الرؤية الحالي فقط"
   },
   "act_errors_alreadyAtTop": {
     "message": "العنصر ذو الفهرس $INDEX$ في الأعلى بالفعل، لا يمكن التمرير إلى الصفحة السابقة",

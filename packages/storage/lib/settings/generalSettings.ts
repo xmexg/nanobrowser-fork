@@ -13,6 +13,13 @@ export interface GeneralSettingsConfig {
   displayHighlights: boolean;
   minWaitPageLoad: number;
   replayHistoricalTasks: boolean;
+  /**
+   * Controls how much of the page is visible to the AI via the DOM tree.
+   * 'auto'    - AI decides (default): starts with visible viewport, AI can expand to all content as needed.
+   * 'visible' - Always only the visible viewport area.
+   * 'all'     - Always all loaded page content.
+   */
+  viewportMode: 'auto' | 'visible' | 'all';
 }
 
 export type GeneralSettingsStorage = BaseStorage<GeneralSettingsConfig> & {
@@ -32,6 +39,7 @@ export const DEFAULT_GENERAL_SETTINGS: GeneralSettingsConfig = {
   displayHighlights: true,
   minWaitPageLoad: 250,
   replayHistoricalTasks: false,
+  viewportMode: 'auto',
 };
 
 const storage = createStorage<GeneralSettingsConfig>('general-settings', DEFAULT_GENERAL_SETTINGS, {

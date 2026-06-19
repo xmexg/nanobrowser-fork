@@ -97,13 +97,15 @@ export async function getClickableElements(
   focusElement = -1,
   viewportExpansion = 0,
   debugMode = false,
+  includeAllContent = false,
 ): Promise<DOMState> {
+  const effectiveViewportExpansion = includeAllContent ? -1 : viewportExpansion;
   const [elementTree, selectorMap] = await _buildDomTree(
     tabId,
     url,
     showHighlightElements,
     focusElement,
-    viewportExpansion,
+    effectiveViewportExpansion,
     debugMode,
   );
   return { elementTree, selectorMap };
@@ -135,6 +137,9 @@ async function _buildDomTree(
 
   await injectBuildDomTreeScripts(tabId);
 
+  // includeAllContent is computed from viewportExpansion
+  const includeAllContent = viewportExpansion === -1;
+
   const mainFrameResult = await chrome.scripting.executeScript({
     target: { tabId },
     func: args => {
@@ -149,6 +154,7 @@ async function _buildDomTree(
         startId: 0,
         startHighlightIndex: 0,
         debugMode,
+        includeAllContent,
       },
     ],
   });
@@ -253,6 +259,7 @@ async function constructFrameTree(
           startId: maxNodeId + 1,
           startHighlightIndex: maxHighlightIndex + 1,
           debugMode,
+          includeAllContent: viewportExpansion === -1,
         },
       ],
     });
@@ -500,6 +507,7 @@ export function _parse_node(nodeData: RawDomTreeNode): [DOMBaseNode | null, stri
     shadowRoot: elementData.shadowRoot ?? false,
     parent: null,
     viewportInfo: viewportInfo,
+    textContent: elementData.textContent,
   });
 
   const childrenIds = elementData.children || [];

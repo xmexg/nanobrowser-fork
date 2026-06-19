@@ -82,6 +82,7 @@ export class DOMElementNode extends DOMBaseNode {
   viewportCoordinates?: CoordinateSet;
   pageCoordinates?: CoordinateSet;
   viewportInfo?: ViewportInfo;
+  textContent?: string; // Direct text content (immediate children text, no nested duplication)
 
   /*
 	### State injected by the browser context.
@@ -106,6 +107,7 @@ export class DOMElementNode extends DOMBaseNode {
     viewportInfo?: ViewportInfo;
     isNew?: boolean | null;
     parent?: DOMElementNode | null;
+    textContent?: string;
   }) {
     super(params.isVisible, params.parent);
     this.tagName = params.tagName;
@@ -121,6 +123,18 @@ export class DOMElementNode extends DOMBaseNode {
     this.pageCoordinates = params.pageCoordinates;
     this.viewportInfo = params.viewportInfo;
     this.isNew = params.isNew ?? null;
+    this.textContent = params.textContent;
+  }
+
+  hasParentWithHighlightIndex(): boolean {
+    let current: DOMElementNode | null = this.parent;
+    while (current != null) {
+      if (current.highlightIndex !== null) {
+        return true;
+      }
+      current = current.parent;
+    }
+    return false;
   }
 
   // Cache for the hash value
@@ -319,6 +333,10 @@ export class DOMElementNode extends DOMBaseNode {
           // makes sense to have if the website has lots of text -> so the LLM knows which things are part of the same clickable element and which are not
           line += ' />'; // 1 token
           formattedText.push(line);
+        } else if (node.textContent && !node.hasParentWithHighlightIndex()) {
+          // For non-highlighted elements with direct text content, output as context
+          // (e.g. question text in container divs, section headings, etc.)
+          formattedText.push(`${depthStr}>${node.textContent}`);
         }
 
         // Process children regardless

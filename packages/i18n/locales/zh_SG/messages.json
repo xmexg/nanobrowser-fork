@@ -262,6 +262,21 @@
   "options_general_replayHistoricalTasks_desc": {
     "message": "启用储存与重播代理程序的步骤历史纪录 (此为实验性功能，可能存在问题)"
   },
+  "options_general_viewportMode": {
+    "message": "AI可视范围"
+  },
+  "options_general_viewportMode_desc": {
+    "message": "控制AI可以看到的页面范围。AI决定（默认）：先显示可视区域，AI可根据需要自动扩展到已加载区域；可视区域：仅显示当前视口内内容；已加载区域：显示页面所有已加载内容（可能消耗更多Token）"
+  },
+  "options_general_viewportMode_auto": {
+    "message": "AI决定（默认）"
+  },
+  "options_general_viewportMode_visible": {
+    "message": "可视区域"
+  },
+  "options_general_viewportMode_all": {
+    "message": "已加载区域"
+  },
   "options_models_providers_header": {
     "message": "大型语言模型（LLM）提供商"
   },
@@ -788,6 +803,15 @@
   },
   "act_nextPage_ok": {
     "message": "已滚动至下一页"
+  },
+  "act_changeViewportMode_start": {
+    "message": "切换可视范围模式"
+  },
+  "act_changeViewportMode_all": {
+    "message": "已切换到完整页面模式 — 现在显示全部已加载内容"
+  },
+  "act_changeViewportMode_visible": {
+    "message": "已切换到可视区域模式 — 现在只显示当前视口"
   },
   "act_errors_alreadyAtTop": {
     "message": "索引为 $INDEX$ 的元素已在顶端，无法滚动至上一页",
